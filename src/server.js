@@ -14,12 +14,12 @@ app.use(express.urlencoded({extended:false}))
 app.use("/api/todos/",todoRoutes)
 app.use(errorHandler)
 
-
+// Routes
 app.get("/",(req,res)=>{
     res.send("<h1>Hello World</h1>")
 })
 app.get("/:name",(req,res)=>{
-    res.send(`<h1>Hello World ${req.params.name}</h1>`)
+    res.send(`<h1>Hello World ${req.params.name}</h1>`)// params i.e values you passes in your URL
 })
 
 const PORT=process.env.PORT || 3000

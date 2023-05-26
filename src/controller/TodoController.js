@@ -7,7 +7,10 @@ const Todo = require("../model/TodoModel");
 const getAllTodos = asyncHandler(async (req, res) => {
   // console.log(req.body)
   const todos = await Todo.find();
-  res.status(200).json(todos);
+  res
+  .status(200)// ye status code Postman me dekho ap yhn sy galt status code bhi send kr sakte hen xD 
+    //agar status code nhi dogy too by default "200 OK" dyga 
+  .json(todos);
   //   res.status(200).json({ message: "Get all todos" });
 });
 
@@ -22,18 +25,22 @@ const createTodo = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("all field are mandatory");
   }
-  const todo = await Todo.create({
-    activityType: activityType,
-    date: date,
-    duration: duration,
-    description: description,
-    fname:fname,
-    lname:lname,
-    contact:contact,
-    email:email,
-    image:image,
-    age:age,
-  });
+  // const todo = await Todo.create({
+  //   activityType: activityType,
+  //   date: date,
+  //   duration: duration,
+  //   description: description,
+  //   fname:fname,
+  //   lname:lname,
+  //   contact:contact,
+  //   email:email,
+  //   image:image,
+  //   age:age,
+  // });
+
+  // Both works same up and down
+
+  const todo = await Todo.create(req.body);
   res.status(200).json(todo);
   // res.status(200).json({ message: "create a todo" });
 });
@@ -44,7 +51,7 @@ const createTodo = asyncHandler(async (req, res) => {
 const getTodo = asyncHandler(async (req, res) => {
   //   const { id } = req.params;
   const todo = await Todo.findById(req.params.id);
-  if (!todo) {
+  if (!todo) {    // here its not work
     res.status(404);
     throw new Error("Todo not found");
   }
@@ -61,6 +68,7 @@ const updateTodo = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Todo not found");
   }
+  
   const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
