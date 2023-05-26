@@ -33,6 +33,9 @@ const todoSchema=mongoose.Schema({
         type:String,
         required:[true,"please enter your contact"],
     },
+    age:{
+        type:Number,
+    },
     image:{
         type:String,
         default:" "

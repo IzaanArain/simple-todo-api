@@ -16,7 +16,7 @@ const getAllTodos = asyncHandler(async (req, res) => {
 //@access Private
 const createTodo = asyncHandler(async (req, res) => {
   // console.log(`the request body is :`, req.body);
-  const { activityType, date, duration, description,fname,lname,contact,email,image } = req.body;
+  const { activityType, date, duration, description,fname,lname,contact,email,image,age } = req.body;
   if (!activityType || !duration || !date || !description || !fname|| !lname|| !contact|| !email) {
     // res.status(400).json({message:"please add a text"})
     res.status(400);
@@ -32,6 +32,7 @@ const createTodo = asyncHandler(async (req, res) => {
     contact:contact,
     email:email,
     image:image,
+    age:age,
   });
   res.status(200).json(todo);
   // res.status(200).json({ message: "create a todo" });
